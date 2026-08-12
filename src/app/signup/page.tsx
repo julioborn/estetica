@@ -29,9 +29,24 @@ export default async function SignupPage({
         </CardHeader>
         <CardContent>
           <form action={signup} className="flex flex-col gap-4">
+            <div className="grid grid-cols-2 gap-3">
+              <div className="flex flex-col gap-2">
+                <Label htmlFor="firstName">Nombre</Label>
+                <Input id="firstName" name="firstName" type="text" required />
+              </div>
+              <div className="flex flex-col gap-2">
+                <Label htmlFor="lastName">Apellido</Label>
+                <Input id="lastName" name="lastName" type="text" required />
+              </div>
+            </div>
             <div className="flex flex-col gap-2">
-              <Label htmlFor="fullName">Nombre completo</Label>
-              <Input id="fullName" name="fullName" type="text" required />
+              <Label htmlFor="dateOfBirth">Fecha de nacimiento</Label>
+              <Input
+                id="dateOfBirth"
+                name="dateOfBirth"
+                type="date"
+                required
+              />
             </div>
             <div className="flex flex-col gap-2">
               <Label htmlFor="email">Email</Label>
@@ -42,6 +57,16 @@ export default async function SignupPage({
               <Input
                 id="password"
                 name="password"
+                type="password"
+                minLength={6}
+                required
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="confirmPassword">Repetir contraseña</Label>
+              <Input
+                id="confirmPassword"
+                name="confirmPassword"
                 type="password"
                 minLength={6}
                 required

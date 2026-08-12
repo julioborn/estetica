@@ -14,7 +14,7 @@ export default async function AdminHomePage() {
 
   const { data: profile } = await supabase
     .from("profiles")
-    .select("full_name, role")
+    .select("first_name, last_name, role")
     .eq("id", user.id)
     .single();
 
@@ -22,7 +22,10 @@ export default async function AdminHomePage() {
     <div className="mx-auto flex w-full max-w-2xl flex-1 flex-col gap-4 p-6">
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-semibold">
-          Panel superadmin — {profile?.full_name ?? user.email}
+          Panel superadmin —{" "}
+          {profile?.first_name
+            ? `${profile.first_name} ${profile.last_name ?? ""}`.trim()
+            : user.email}
         </h1>
         <LogoutButton />
       </div>
