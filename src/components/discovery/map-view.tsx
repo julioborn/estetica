@@ -1,7 +1,15 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { APIProvider, Map, Marker, InfoWindow } from "@vis.gl/react-google-maps";
+import Image from "next/image";
+import {
+  APIProvider,
+  Map,
+  Marker,
+  AdvancedMarker,
+  InfoWindow,
+} from "@vis.gl/react-google-maps";
+import { Store } from "lucide-react";
 import { useState } from "react";
 import type { NearbyBusiness } from "@/lib/discovery/types";
 
@@ -28,6 +36,7 @@ export function MapView({
     <div className="h-[60vh] overflow-hidden rounded-sm border border-border">
       <APIProvider apiKey={apiKey}>
         <Map
+          mapId="DEMO_MAP_ID"
           defaultCenter={center ?? CALCHAQUI_CENTER}
           defaultZoom={center ? 14 : 13}
           disableDefaultUI
@@ -48,11 +57,27 @@ export function MapView({
             />
           )}
           {located.map((business) => (
-            <Marker
+            <AdvancedMarker
               key={business.id}
               position={{ lat: business.lat, lng: business.lng }}
               onClick={() => setActiveId(business.id)}
-            />
+            >
+              <div className="relative size-10 overflow-hidden rounded-sm border-2 border-accent bg-card shadow-[0_2px_8px_-2px_rgba(30,30,28,0.4)]">
+                {business.cover_url ? (
+                  <Image
+                    src={business.cover_url}
+                    alt=""
+                    fill
+                    className="object-cover"
+                    sizes="40px"
+                  />
+                ) : (
+                  <div className="flex size-full items-center justify-center bg-accent text-accent-foreground">
+                    <Store className="size-5" strokeWidth={1.5} />
+                  </div>
+                )}
+              </div>
+            </AdvancedMarker>
           ))}
           {active && (
             <InfoWindow
