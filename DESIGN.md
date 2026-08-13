@@ -2,148 +2,137 @@
 name: Estetica
 description: Reservá turnos en barberías, peluquerías, masajes y más, cerca tuyo.
 colors:
-  glass-white: "#f7f8f6"
-  charcoal-ink: "#1e1e1c"
-  pane-surface: "#ffffff"
-  counter-neutral: "#ececea"
-  muted-ink: "#6b6b66"
-  vinyl-red: "#c4362e"
-  brick-error: "#b8452f"
-  hairline: "#dedbd8"
+  ring-black: "#171412"
+  elevated-surface: "#211d19"
+  ring-light-gold: "#f0a93f"
+  warm-ink: "#f5efe6"
+  muted-warm: "#9c9188"
+  hairline-dark: "#332e28"
+  alert-red: "#e5484d"
 typography:
   display:
-    fontFamily: "Archivo, ui-sans-serif, system-ui"
-    fontWeight: 900
-    letterSpacing: "0.02em"
+    fontFamily: "Plus Jakarta Sans, ui-sans-serif, system-ui"
+    fontWeight: 700
   body:
     fontFamily: "Geist Sans, ui-sans-serif, system-ui"
     fontWeight: 400
     lineHeight: 1.5
 rounded:
-  sm: "0.21rem"
-  md: "0.28rem"
-  lg: "0.35rem"
-spacing:
-  sm: "8px"
-  md: "16px"
+  md: "0.8rem"
+  lg: "1rem"
+  full: "9999px"
 components:
   button-primary:
-    backgroundColor: "{colors.charcoal-ink}"
-    textColor: "{colors.glass-white}"
+    backgroundColor: "{colors.warm-ink}"
+    textColor: "{colors.ring-black}"
     rounded: "{rounded.lg}"
   chip-selected:
-    backgroundColor: "{colors.vinyl-red}"
-    textColor: "#ffffff"
-    rounded: "{rounded.sm}"
-  chip-unselected:
-    backgroundColor: "transparent"
-    textColor: "{colors.charcoal-ink}"
-    rounded: "{rounded.sm}"
+    backgroundColor: "{colors.ring-light-gold}"
+    textColor: "{colors.ring-black}"
+    rounded: "{rounded.full}"
+  avatar-glow:
+    backgroundColor: "{colors.elevated-surface}"
+    rounded: "{rounded.full}"
 ---
 
 # Design System: Estetica
 
 ## Overview
 
-**Creative North Star: "Vidriera con Vinilo" (Storefront Cut-Vinyl)**
+**Creative North Star: "Ring Light" (aro de luz)**
 
-The app reads like the glass door of a small salon or barbería: every label is cut-vinyl lettering applied on glass, not printed on paper — bold, rectangular, high-contrast, one color of "ink" at a time. This replaces an earlier "salon vanity counter" direction (cream/amber, rounded pill chips) that the user tried in the browser and didn't like; this is a full redesign, not a refinement, chosen from a second round of concept exploration where the user picked this direction over three other grounded proposals (corkboard directory, receipt-booklet confirmation, strip-curtain navigation) and the generic wellness-SaaS category standard.
+The app is a dim room lit by one warm halo — the content-creator ring light and phone-mirror setup, the exact aesthetic of a "getting ready" beauty video. This is the project's third visual world: it replaced "Mostrador de Peluquería" (cream/amber counter, rejected before shipping) and then "Vidriera con Vinilo" (vinyl-red/charcoal signage, shipped but the user judged it "muy simple y antiguo" — too plain and dated — after living with it across several built screens). Ring Light was chosen specifically to read as current: dark ground, a glowing accent, circular avatar-framed photography, because the standing complaint was that the app felt old.
 
-Operate mode stays in force: this is a booking task, not a brand showcase. The vinyl-lettering voice is concentrated in labels, headings, and category tags (the "signage" moments); body copy (descriptions, addresses) stays in a plain readable sans so paragraphs never fight the display voice.
-
-Rejected: the previous cream/amber "counter" world (too soft/decorative for what the user wanted), and — still, as before — the generic pastel-wellness-app look.
+Operate-mode discipline still holds — one accent, rationed to state/selection/glow, never spread across a whole surface. What changed structurally: light mode → dark mode (justified by the source scene: a ring light is dramatic specifically against a dim room, not daylight), rectangular die-cut shapes → circular/full-round shapes, the industrial Archivo Black voice → the warmer, rounder Plus Jakarta Sans.
 
 **Key Characteristics:**
-- Near-white "glass" ground, matte charcoal "vinyl" ink, one vinyl-red accent reserved for state/selection
-- Archivo Black (uppercase, tracked) as the signage voice for labels, chip text, and headings; Geist Sans for everything read at length
-- Small, rectangular corners everywhere (0.21–0.35rem) — die-cut labels, not pills or soft cards
-- Selected = solid vinyl-red fill; unselected = outline only, like an unpeeled decal outline
+- Near-black warm ground; nothing is pure black or cold gray
+- One warm gold "ring light" glow, applied as light/shadow (`box-shadow`, `ring`), never a flat fill outside buttons
+- Every business photo sits in a circular frame with a glowing ring border — the signature, repeated motif
+- Full-round pills for chips/toggles/badges; soft `1rem`+ radius for cards
 
 ## Colors
 
-Restrained palette: the vinyl-red accent is the one color note against neutrals.
-
 ### Primary
-- **Charcoal Ink** (`#1e1e1c`): body text, primary button fill — the matte-black-vinyl neutral.
+- **Ring Black** (`#171412`): page background. Warm-tinted near-black, not a cold true-black.
 
 ### Secondary
-- **Vinyl Red** (`#c4362e`): the one accent. Selected category label, active list/map toggle segment, focus rings. Applied solid, like ink — never a tint or gradient.
+- **Ring-Light Gold** (`#f0a93f`): the one accent. Selected chip, active toggle, focus rings, and the glow around business photos. Always paired with a soft blurred shadow (the "halo"), never a flat fill spanning more than a small control.
 
 ### Neutral
-- **Glass White** (`#f7f8f6`): page background — the "pane."
-- **Pane Surface** (`#ffffff`): cards, popovers — brighter than the ground so objects read as sitting in front of the glass.
-- **Counter Neutral** (`#ececea`): secondary surfaces, hover fills.
-- **Muted Ink** (`#6b6b66`): secondary/placeholder text.
-- **Hairline** (`#dedbd8`): borders, dividers — thin, like the edge of a cut decal.
-- **Brick Error** (`#b8452f`): destructive actions only.
+- **Elevated Surface** (`#211d19`): cards, popovers — one step brighter than the ground.
+- **Secondary Surface** (`#2a2521`): hover states, secondary buttons, unselected chip fill.
+- **Warm Ink** (`#f5efe6`): primary text, and primary-button fill (inverted: light fill, dark text — the "torch" against the dark room).
+- **Muted Warm** (`#9c9188`): secondary/placeholder text.
+- **Hairline Dark** (`#332e28`): borders, dividers.
+- **Alert Red** (`#e5484d`): destructive actions only.
 
 ### Named Rules
-**The Applied-Ink Rule.** Vinyl Red is always a solid fill or solid text color, never a tint, gradient, or glow. Vinyl doesn't have opacity variants — it's either applied or it isn't.
+**The Halo, Not Fill Rule.** Ring-Light Gold shows up as a glow (`box-shadow` blur, a `ring-2`/`ring-4` outline) far more often than as a solid background. The only solid-gold fills are small controls (a selected chip, the active toggle segment) — never a card, a section, or a hero.
 
 ## Typography
 
-**Display/Label Font:** Archivo (weight 900, "Black") — the vinyl-lettering voice
-**Body Font:** Geist Sans — descriptions, addresses, paragraph copy
+**Display/Label Font:** Plus Jakarta Sans (weight 700–800)
+**Body Font:** Geist Sans
 
-**Character:** Two-voice system: Archivo Black in uppercase with wide tracking for anything that reads as a physical label (category tags, chip text, business names, section headings); Geist Sans at normal case for anything meant to be read at length. The split is functional, not decorative — it marks "sign" vs. "page."
+**Character:** Warm and rounded rather than industrial — normal sentence case, not uppercase-and-tracked like the previous vinyl world. The display face carries warmth through roundness and weight, not through shouting.
 
 ### Hierarchy
-- **Display label** (Archivo 900, uppercase, tracking-wide, text-xs–2xl depending on context): category chips, business names, section headings ("Servicios").
-- **Body** (Geist 400, text-base/sm): descriptions, addresses, service durations.
-- **Price** (Geist 500): service prices — numeric, not part of the signage voice.
+- **Title** (Jakarta 700, text-2xl): page headings, business names.
+- **Label** (Jakarta 700, text-sm): chip text, button text — no forced uppercase.
+- **Body** (Geist 400): descriptions, addresses.
+- **Price** (Geist 500): service prices.
 
 ## Layout
 
-Same structure as before: mobile-first single column, `max-w-2xl` for reading content. No change to the underlying grid — this redesign is a materials/typography/shape change, not a structural one.
+Unchanged from the prior world structurally: mobile-first single column, `max-w-2xl` reading width. The business profile page now overlaps a circular glow-ringed avatar over the bottom edge of the cover banner (`-mt-16` pull-up), a direct expression of the Ring Light motif on the most important page.
 
 ## Elevation & Depth
 
-Flat by default, same discipline as before: depth only on hover/selection state, never resting.
+Depth is the glow itself, not a generic drop shadow. Two shadow roles:
 
 ### Shadow Vocabulary
-- **Selection glow** (`box-shadow: 0 2px 10px -2px rgba(196,54,46,0.5)`): selected category label and active toggle segment.
-- **Card hover** (`box-shadow: 0 4px 16px -4px rgba(30,30,28,0.15)`): business card hover, signals it's a link.
+- **Ring-light glow** (`0 0 16px -2px rgba(240,169,63,0.5–0.7)`): selected chips, active toggle, avatar photos, hover on cards. Soft, wide blur, no hard offset — light diffusing outward, not a shadow falling down.
+- **Card hover** (`0 0 24px -6px rgba(240,169,63,0.35)`): subtler version for list-card hover.
+
+### Named Rules
+**The Glow-Not-Shadow Rule.** Where the previous world used a dark offset shadow for depth, this world uses a colored glow with zero or near-zero offset — light source, not gravity, is the depth model.
 
 ## Shapes
 
-One corner language now, not two: everything is a small rectangle (`0.21–0.35rem` radius) — chips, badges, cards, buttons, photo thumbnails. Nothing is a pill and nothing is sharp-cornered; the radius is just enough to read as "cut," not "printed."
-
-### Named Rules
-**The Die-Cut Rule.** No element earns a radius larger than `0.35rem`. A rounder corner would read as a sticker/badge from a different world (the old "bulb" language); vinyl is cut with a blade, not stamped.
+Circular and full-round everywhere: avatar/business photos are always `rounded-full` with a glow ring; chips, toggles, and badges are `rounded-full`; cards use a soft `1rem`–`1.5rem` radius. No rectangular die-cut shapes remain from the previous world.
 
 ## Components
 
 ### Buttons
-- **Shape:** `rounded-lg` (now `0.35rem`, matching the die-cut scale)
-- **Primary:** Charcoal Ink fill, Glass White text
-- **Outline:** Hairline stroke, Counter Neutral fill on hover
-- **Disabled:** reduced opacity (used for "próximamente" actions)
+- **Shape:** `rounded-lg` (now scaled to the softer `1rem` base)
+- **Primary:** Warm Ink fill, Ring Black text (inverted for dark ground)
+- **Outline:** Hairline stroke, Secondary Surface fill on hover
 
-### Chips / Category Labels
-- **Unselected:** transparent fill, `border-foreground/25` outline — like an unpeeled decal, not yet applied
-- **Selected:** solid Vinyl Red fill, white text, selection-glow shadow, no border
-- **Voice:** Archivo Black, uppercase, tracked — always
+### Chips / Category Pills
+- **Unselected:** transparent fill, hairline border, muted text
+- **Selected:** solid Ring-Light Gold fill, Ring Black text, halo glow shadow — "the ring lit up"
 
-### Badges (category tags on cards/profile)
-- **Style:** `rounded-sm`, outline variant, Archivo Black uppercase — a small vinyl tag, not a soft pill
+### Avatars (business photos)
+- **Shape:** `rounded-full`, `ring-2` or `ring-4` in Ring-Light Gold, glow shadow
+- **Fallback:** Store icon (lucide) on Secondary Surface when no photo exists yet — never a stretched placeholder
 
 ### Cards (business list, profile sections)
-- **Corner Style:** `rounded-sm`
-- **Background:** Pane Surface with Hairline stroke
-- **Shadow Strategy:** flat at rest, card-hover shadow on interaction
+- **Corner Style:** `rounded-2xl`/`rounded-3xl`
+- **Background:** Elevated Surface
+- **Shadow Strategy:** flat at rest, halo glow on hover
 
-### Empty / Placeholder States
-- **Style:** dashed Hairline border, Pane Surface at 50% opacity
-- **Voice:** heading in Archivo Black, body text in Geist — same warm, specific copy as before ("Estamos arrancando por Calchaquí…")
+### Google Maps InfoWindow (exception)
+Google renders this chrome white regardless of our theme; its text is hardcoded to dark colors (`#171412`/`#6b6b66`) rather than `text-foreground`, since `text-foreground` is near-white in this dark world and would be invisible on Google's white popup background.
 
 ## Do's and Don'ts
 
 ### Do:
-- **Do** keep Archivo Black to uppercase, short strings (labels, names, headings) — never full sentences or paragraphs.
-- **Do** use outline-only as the unselected/inactive state; a filled-but-muted chip reads as a different world.
-- **Do** keep every corner at or under `0.35rem` (the Die-Cut Rule).
+- **Do** frame every business photo in a circular glow ring — it's the one repeated signature across list cards, map pins, and the profile hero.
+- **Do** keep the gold accent as a glow/ring, not a fill, outside of small controls (the Halo Rule).
+- **Do** hardcode dark text colors inside any Google Maps InfoWindow content — it never inherits our dark theme.
 
 ### Don't:
-- **Don't** reintroduce rounded-full/pill shapes — that was the previous, rejected world.
-- **Don't** tint or gradient Vinyl Red — solid fill or solid text only (the Applied-Ink Rule).
-- **Don't** set Archivo Black at body-copy sizes or in sentence case; it's a label voice, not a paragraph voice.
+- **Don't** bring back rectangular/die-cut shapes or uppercase-tracked labels — that was the previous, rejected world.
+- **Don't** use `text-foreground` (near-white) on any surface Google Maps renders itself (InfoWindow), since it isn't tinted by our CSS.
+- **Don't** fabricate business photos; the icon-on-dark-surface fallback is the honest default when none exists.

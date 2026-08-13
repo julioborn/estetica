@@ -77,7 +77,7 @@ export function DiscoveryView({
     <div className="flex flex-1 flex-col gap-4 p-4">
       <div className="flex items-center justify-between gap-3">
         <LocationControl state={location} onRequest={handleRequestLocation} />
-        <div className="flex shrink-0 overflow-hidden rounded-sm border-2 border-foreground/25">
+        <div className="flex shrink-0 overflow-hidden rounded-full border border-border">
           <ViewToggleButton
             active={view === "list"}
             onClick={() => setView("list")}
@@ -145,10 +145,10 @@ function ViewToggleButton({
       onClick={onClick}
       aria-pressed={active}
       className={cn(
-        "flex items-center gap-1.5 px-3 py-1.5 font-heading text-xs font-black tracking-wide uppercase transition-colors",
+        "flex items-center gap-1.5 px-3.5 py-1.5 font-heading text-sm font-bold transition-colors",
         active
-          ? "bg-accent text-accent-foreground"
-          : "bg-transparent text-foreground hover:bg-secondary",
+          ? "bg-accent text-accent-foreground shadow-[0_0_12px_-2px_rgba(240,169,63,0.6)]"
+          : "bg-transparent text-muted-foreground hover:bg-secondary",
       )}
     >
       {icon}

@@ -67,7 +67,7 @@ export default async function BusinessHomePage({
   return (
     <div className="mx-auto flex w-full max-w-2xl flex-1 flex-col gap-6 p-4">
       <div className="flex items-center justify-between">
-        <h1 className="font-heading text-2xl font-black text-foreground">
+        <h1 className="font-heading text-2xl font-bold text-foreground">
           Hola, {displayName}
         </h1>
         <LogoutButton />

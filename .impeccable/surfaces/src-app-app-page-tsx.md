@@ -11,14 +11,14 @@ related_targets: []
 
 ## Audience, job, action, proof, constraints
 
-A client in/around Calchaquí opens the app to see which barberías/peluquerías/masajes/etc. are nearby, filter by rubro, and book. Primary action: pick a business from the list, go to its profile, book (booking itself lands in a later phase). Proof is the business's own real data (name, category, address, distance, services/prices) — no fabricated content. Hard constraint: most likely real-world state at launch is an empty or near-empty list (small town, brand-new marketplace) — the empty state carries as much weight as the populated one.
+A client in/around Calchaquí opens the app to see which barberías/peluquerías/masajes/etc. are nearby, filter by rubro, and book. Primary action: pick a business from the list, go to its profile, book (booking itself lands in a later phase). Proof is the business's own real data (name, category, address, distance, services/prices) — no fabricated content. Google Maps API key and MP Estudio (a real business) are now live, so the discovery/map screen shows real data, not just an empty state.
 
 ## Chosen direction and memorable moment
 
-**Redesigned** (round 2): the user rejected the first direction (Mostrador de Peluquería — cream/amber, rounded pill chips) after seeing it live. Re-ran concept exploration; the user picked **Vidriera con Vinilo (Storefront Cut-Vinyl)** over three other grounded alternates (corkboard directory, receipt-booklet, strip-curtain) and the category-standard canon. Every label reads like cut-vinyl lettering on a shop's glass door: Archivo Black uppercase, small rectangular corners, vinyl-red solid fill for selection only, outline-only for unselected. Memorable moment: a category label going from an outlined "unpeeled decal" to a solid red "applied" tag on selection.
+**Redesigned again** (round 3): after living with Vidriera con Vinilo across several built screens, the user judged the whole app "muy simple y antiguo" (too plain/dated) and asked to re-explore the full visual direction, not just polish it. Re-ran concept exploration with fresh candidates skewed toward feeling current (the standing complaint was specifically "looks old"); the user picked **Ring Light** over three alternates (Ahora Atendiendo/queue board, Barbería Moderna/dark-wood-brass revival, and the canon) and the category standard. Dark ground, one warm gold glow accent, full-round circular shapes — every business photo sits in a glowing ring, like a face lit by a ring light. Memorable moment: a category pill's ring "lighting up" gold on selection; the business profile's circular avatar glowing over the cover banner.
 
 ## Unresolved decisions
 
-- Map view is wired (list/map toggle, `nearby_businesses` RPC returns coordinates-aware distance) but shows a "not configured yet" placeholder until `NEXT_PUBLIC_GOOGLE_MAPS_API_KEY` is set — user is setting up Google Cloud billing for this now.
-- "Open now" status was intentionally left out of the business card: no business has populated `business_hours` yet, and faking an open/closed dot would be inventing a claim. Add it once the business dashboard (Phase 3) lets owners set hours.
-- Whether discovery should be visible pre-login (public, like PedidosYa) instead of gated behind `/app` is an open product question, not decided here.
+- "Open now" status still intentionally left out of the business card — no business has populated `business_hours` yet.
+- Whether discovery should be visible pre-login (public, like PedidosYa) instead of gated behind `/app` is still an open product question.
+- Google Maps InfoWindow content must keep hardcoded dark text colors (not `text-foreground`) since Google's popup chrome is always white regardless of app theme — a real constraint any future map work must respect.

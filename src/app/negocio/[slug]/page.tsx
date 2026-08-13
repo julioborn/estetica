@@ -65,7 +65,7 @@ export default async function BusinessProfilePage({
 
   return (
     <div className="flex flex-1 flex-col">
-      <div className="relative h-56 w-full bg-secondary sm:h-72">
+      <div className="relative h-48 w-full bg-secondary sm:h-64">
         {cover ? (
           <Image
             src={cover.url}
@@ -80,21 +80,35 @@ export default async function BusinessProfilePage({
             <Store className="size-12" strokeWidth={1.5} />
           </div>
         )}
+        <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-background to-transparent" />
       </div>
 
       <div className="mx-auto flex w-full max-w-2xl flex-1 flex-col gap-6 p-4">
+        <div className="-mt-16 flex flex-col items-start gap-3">
+          <div className="relative size-24 shrink-0 overflow-hidden rounded-full ring-4 ring-accent shadow-[0_0_28px_-4px_rgba(240,169,63,0.7)]">
+            {cover ? (
+              <Image
+                src={cover.url}
+                alt=""
+                fill
+                className="object-cover"
+                sizes="96px"
+              />
+            ) : (
+              <div className="flex size-full items-center justify-center bg-secondary text-muted-foreground">
+                <Store className="size-9" strokeWidth={1.5} />
+              </div>
+            )}
+          </div>
+        </div>
         <div className="flex flex-col gap-2">
-          <h1 className="font-heading text-2xl font-black text-foreground">
+          <h1 className="font-heading text-2xl font-bold text-foreground">
             {business.name}
           </h1>
           {categoryNames.length > 0 && (
             <div className="flex flex-wrap gap-1">
               {categoryNames.map((name) => (
-                <Badge
-                  key={name}
-                  variant="outline"
-                  className="font-heading font-black tracking-wide uppercase"
-                >
+                <Badge key={name} variant="secondary" className="font-medium">
                   {name}
                 </Badge>
               ))}
@@ -147,9 +161,7 @@ export default async function BusinessProfilePage({
         )}
 
         <div className="flex flex-col gap-3">
-          <h2 className="font-heading font-black tracking-wide text-foreground uppercase">
-            Servicios
-          </h2>
+          <h2 className="font-heading font-bold text-foreground">Servicios</h2>
           {activeServices.length === 0 ? (
             <p className="text-sm text-muted-foreground">
               Este negocio todavía no cargó sus servicios.

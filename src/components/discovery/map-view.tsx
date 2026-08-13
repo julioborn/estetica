@@ -33,7 +33,7 @@ export function MapView({
   const active = located.find((b) => b.id === activeId) ?? null;
 
   return (
-    <div className="h-[60vh] overflow-hidden rounded-sm border border-border">
+    <div className="h-[60vh] overflow-hidden rounded-3xl border border-border">
       <APIProvider apiKey={apiKey}>
         <Map
           mapId="DEMO_MAP_ID"
@@ -49,9 +49,9 @@ export function MapView({
               icon={{
                 path: 0, // google.maps.SymbolPath.CIRCLE
                 scale: 7,
-                fillColor: "#1e6fb8",
+                fillColor: "#4A9EFF",
                 fillOpacity: 1,
-                strokeColor: "#ffffff",
+                strokeColor: "#171412",
                 strokeWeight: 2,
               }}
             />
@@ -62,7 +62,7 @@ export function MapView({
               position={{ lat: business.lat, lng: business.lng }}
               onClick={() => setActiveId(business.id)}
             >
-              <div className="relative size-10 overflow-hidden rounded-sm border-2 border-accent bg-card shadow-[0_2px_8px_-2px_rgba(30,30,28,0.4)]">
+              <div className="relative size-11 overflow-hidden rounded-full ring-2 ring-accent bg-card shadow-[0_0_14px_-2px_rgba(240,169,63,0.7)]">
                 {business.cover_url ? (
                   <Image
                     src={business.cover_url}
@@ -89,11 +89,11 @@ export function MapView({
                 onClick={() => router.push(`/negocio/${active.slug}`)}
                 className="flex flex-col gap-0.5 text-left"
               >
-                <span className="font-heading font-black text-foreground">
+                <span className="font-heading font-bold text-[#171412]">
                   {active.name}
                 </span>
                 {active.address_text && (
-                  <span className="text-xs text-muted-foreground">
+                  <span className="text-xs text-[#6b6b66]">
                     {active.address_text}
                   </span>
                 )}

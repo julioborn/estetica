@@ -14,7 +14,7 @@ export function CategoryPicker({
       {categories.map((category) => (
         <label
           key={category.id}
-          className="flex cursor-pointer items-center gap-2 rounded-sm border-2 border-foreground/25 px-3.5 py-2 font-heading text-xs font-black tracking-wide text-foreground uppercase transition-all has-[:checked]:border-accent has-[:checked]:bg-accent has-[:checked]:text-accent-foreground"
+          className="flex cursor-pointer items-center gap-2 rounded-full border border-border px-4 py-2 font-heading text-sm font-bold text-muted-foreground transition-all has-[:checked]:border-accent has-[:checked]:bg-accent has-[:checked]:text-accent-foreground has-[:checked]:shadow-[0_0_12px_-2px_rgba(240,169,63,0.6)]"
         >
           <input
             type="checkbox"

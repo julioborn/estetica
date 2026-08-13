@@ -45,10 +45,10 @@ function Chip({
       onClick={onClick}
       aria-pressed={active}
       className={cn(
-        "shrink-0 whitespace-nowrap rounded-sm border-2 px-3.5 py-2 font-heading text-xs font-black tracking-wide uppercase transition-all",
+        "shrink-0 rounded-full border px-4 py-2 font-heading text-sm font-bold whitespace-nowrap transition-all",
         active
-          ? "border-accent bg-accent text-accent-foreground shadow-[0_2px_10px_-2px_rgba(196,54,46,0.5)]"
-          : "border-foreground/25 bg-transparent text-foreground hover:border-foreground/50",
+          ? "border-accent bg-accent text-accent-foreground shadow-[0_0_16px_-2px_rgba(240,169,63,0.65)]"
+          : "border-border bg-transparent text-muted-foreground hover:border-foreground/30 hover:text-foreground",
       )}
     >
       {children}

@@ -9,7 +9,7 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-sans);
   --font-mono: var(--font-geist-mono);
-  --font-heading: var(--font-archivo);
+  --font-heading: var(--font-jakarta);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -49,42 +49,41 @@
 }
 
 :root {
-  /* Vidriera con Vinilo — glass-white ground, vinyl-red accent reserved for
-     state/selection (applied solid like ink, never decorative), matte
-     charcoal ink, hairline gray for structure. Small radius: die-cut labels,
-     not pills. */
-  --background: #f7f8f6;
-  --foreground: #1e1e1c;
-  --card: #ffffff;
-  --card-foreground: #1e1e1c;
-  --popover: #ffffff;
-  --popover-foreground: #1e1e1c;
-  --primary: #1e1e1c;
-  --primary-foreground: #f7f8f6;
-  --secondary: #ececea;
-  --secondary-foreground: #1e1e1c;
-  --muted: #ececea;
-  --muted-foreground: #6b6b66;
-  --accent: #c4362e;
-  --accent-foreground: #ffffff;
-  --destructive: #b8452f;
-  --border: #dedbd8;
-  --input: #dedbd8;
-  --ring: #c4362e;
-  --chart-1: #c4362e;
-  --chart-2: #1e1e1c;
-  --chart-3: #6b6b66;
-  --chart-4: #dedbd8;
-  --chart-5: #b8452f;
-  --radius: 0.35rem;
-  --sidebar: #ffffff;
-  --sidebar-foreground: #1e1e1c;
-  --sidebar-primary: #1e1e1c;
-  --sidebar-primary-foreground: #f7f8f6;
-  --sidebar-accent: #ececea;
-  --sidebar-accent-foreground: #1e1e1c;
-  --sidebar-border: #dedbd8;
-  --sidebar-ring: #c4362e;
+  /* Ring Light — a dim room lit by one warm halo. Near-black warm ground,
+     ring-light gold reserved for state/selection/glow, warm off-white ink.
+     Circular forms throughout: full-round pills, glow-ringed avatar photos. */
+  --background: #171412;
+  --foreground: #f5efe6;
+  --card: #211d19;
+  --card-foreground: #f5efe6;
+  --popover: #211d19;
+  --popover-foreground: #f5efe6;
+  --primary: #f5efe6;
+  --primary-foreground: #171412;
+  --secondary: #2a2521;
+  --secondary-foreground: #f5efe6;
+  --muted: #2a2521;
+  --muted-foreground: #9c9188;
+  --accent: #f0a93f;
+  --accent-foreground: #171412;
+  --destructive: #e5484d;
+  --border: #332e28;
+  --input: #332e28;
+  --ring: #f0a93f;
+  --chart-1: #f0a93f;
+  --chart-2: #f5efe6;
+  --chart-3: #9c9188;
+  --chart-4: #332e28;
+  --chart-5: #e5484d;
+  --radius: 1rem;
+  --sidebar: #211d19;
+  --sidebar-foreground: #f5efe6;
+  --sidebar-primary: #f5efe6;
+  --sidebar-primary-foreground: #171412;
+  --sidebar-accent: #2a2521;
+  --sidebar-accent-foreground: #f5efe6;
+  --sidebar-border: #332e28;
+  --sidebar-ring: #f0a93f;
 }
 
 .dark {

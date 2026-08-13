@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Archivo } from "next/font/google";
+import { Geist, Geist_Mono, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -12,10 +12,10 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const archivo = Archivo({
-  variable: "--font-archivo",
+const jakarta = Plus_Jakarta_Sans({
+  variable: "--font-jakarta",
   subsets: ["latin"],
-  weight: ["700", "900"],
+  weight: ["600", "700", "800"],
 });
 
 export const metadata: Metadata = {
@@ -27,27 +27,28 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="es"
-      className={`${geistSans.variable} ${geistMono.variable} ${archivo.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${jakarta.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         {/*
           THESIS: Reject the generic pastel-wellness booking template; the app
-          is a storefront window, not a dashboard — every label reads like
-          cut-vinyl lettering stuck on glass, not printed on paper.
-          OWN-WORLD: glass-white ground #F7F8F6, vinyl-red accent #C4362E
-          (reserved for state/selection only, applied solid like ink), matte
-          charcoal ink #1E1E1C, hairline gray #DEDED8 for structure. Archivo
-          Black for display/labels (the vinyl-lettering voice, uppercase,
-          tight tracking), Geist Sans for body copy. Rectangular die-cut label
-          shapes (small radius, not pills) for chips/tags; selected = solid
-          vinyl-red fill, unselected = outline only, like an unpeeled decal.
-          STORY: a client reads the rubro labels like reading a shop's front
-          door, picks one, and the list behind the glass updates.
-          FIRST VIEWPORT: horizontal rubro label row (outlined = unselected,
-          solid vinyl-red = selected), a scrollable list of business cards
-          below, map view as a toggle.
-          FORM: Vidriera con Vinilo (Storefront Cut-Vinyl), chosen alternate
-          over grounded direction #6, seed key 4015b024.
+          is a dim room lit by a ring light, not a printed page — one warm
+          halo marks what's alive on screen, everything else stays low.
+          OWN-WORLD: near-black warm ground #171412, elevated surface #211D19,
+          warm ring-light gold #F0A93F (reserved for state/selection/glow),
+          warm off-white ink #F5EFE6. Plus Jakarta Sans (warm, rounded
+          geometric) for display/labels, Geist Sans for body copy. Circular
+          forms throughout — avatar-framed photos with a glowing ring border,
+          full-round pill chips; selected = the ring lights up (glow +
+          accent), unselected = dim/unlit outline.
+          STORY: a client scrolls a dim list of negocios, taps a rubro and its
+          ring lights up gold, taps a business and its photo glows like it's
+          on camera.
+          FIRST VIEWPORT: horizontal rubro pill row (lit gold = selected, dim
+          outline = unselected), a scrollable list of business cards below
+          with circular glow-ringed photos, map view as a toggle.
+          FORM: Ring Light, chosen alternate over grounded direction #7 (Chat
+          Commerce Catalog), seed key 41c4733a.
           FINISH: unreviewed and undocumented is unfinished; this build ends
           with the finish review, the verdict, and DESIGN.md.
         */}
