@@ -52,8 +52,9 @@
 
 :root {
   /* Spa-calm palette: soft taupe-beige ground (not stark white), gentle warm
-     ink, dusty rose accent for primary actions/selection, sage for "open
-     now" state. Pastel and muted throughout — nothing loud. */
+     ink, sage green accent for primary actions/selection — neutral, works
+     for barbería and beauty alike. Dusty teal reserved for "open now".
+     Pastel and muted throughout — nothing loud. */
   --background: #eae4db;
   --foreground: #3d3630;
   --card: #f5f1e9;
@@ -66,17 +67,17 @@
   --secondary-foreground: #3d3630;
   --muted: #dfd6c8;
   --muted-foreground: #8c8072;
-  --accent: #c98fa0;
-  --accent-foreground: #3d3630;
-  --success: #8fa894;
-  --success-foreground: #2a332c;
+  --accent: #9bae9b;
+  --accent-foreground: #2c332c;
+  --success: #8ab0b3;
+  --success-foreground: #22302f;
   --destructive: #b24949;
   --border: #d9cfc0;
   --input: #d9cfc0;
-  --ring: #c98fa0;
-  --chart-1: #c98fa0;
+  --ring: #9bae9b;
+  --chart-1: #9bae9b;
   --chart-2: #3d3630;
-  --chart-3: #8fa894;
+  --chart-3: #8ab0b3;
   --chart-4: #8c8072;
   --chart-5: #b24949;
   --radius: 0.85rem;
@@ -87,7 +88,7 @@
   --sidebar-accent: #dfd6c8;
   --sidebar-accent-foreground: #3d3630;
   --sidebar-border: #d9cfc0;
-  --sidebar-ring: #c98fa0;
+  --sidebar-ring: #9bae9b;
 }
 
 .dark {
