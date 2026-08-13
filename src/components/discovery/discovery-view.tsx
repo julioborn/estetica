@@ -147,8 +147,8 @@ function ViewToggleButton({
       className={cn(
         "flex items-center gap-1.5 px-3.5 py-1.5 font-heading text-sm font-bold transition-colors",
         active
-          ? "bg-accent text-accent-foreground shadow-[0_0_12px_-2px_rgba(240,169,63,0.6)]"
-          : "bg-transparent text-muted-foreground hover:bg-secondary",
+          ? "bg-accent text-accent-foreground"
+          : "bg-card text-muted-foreground hover:bg-secondary",
       )}
     >
       {icon}

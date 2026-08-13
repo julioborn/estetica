@@ -62,7 +62,7 @@ export function MapView({
               position={{ lat: business.lat, lng: business.lng }}
               onClick={() => setActiveId(business.id)}
             >
-              <div className="relative size-11 overflow-hidden rounded-full ring-2 ring-accent bg-card shadow-[0_0_14px_-2px_rgba(240,169,63,0.7)]">
+              <div className="relative size-11 overflow-hidden rounded-xl border-2 border-accent bg-card shadow-md">
                 {business.cover_url ? (
                   <Image
                     src={business.cover_url}
@@ -89,11 +89,11 @@ export function MapView({
                 onClick={() => router.push(`/negocio/${active.slug}`)}
                 className="flex flex-col gap-0.5 text-left"
               >
-                <span className="font-heading font-bold text-[#171412]">
+                <span className="font-heading font-bold text-[#2a2118]">
                   {active.name}
                 </span>
                 {active.address_text && (
-                  <span className="text-xs text-[#6b6b66]">
+                  <span className="text-xs text-[#8a7b68]">
                     {active.address_text}
                   </span>
                 )}

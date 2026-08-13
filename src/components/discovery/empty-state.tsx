@@ -3,7 +3,7 @@ import { Store } from "lucide-react";
 export function EmptyState({ filtered }: { filtered: boolean }) {
   return (
     <div className="flex flex-col items-center gap-3 rounded-3xl border border-dashed border-border bg-card/50 px-6 py-14 text-center">
-      <div className="flex size-14 items-center justify-center rounded-full bg-secondary text-muted-foreground ring-1 ring-accent/30">
+      <div className="flex size-14 items-center justify-center rounded-full bg-secondary text-muted-foreground">
         <Store className="size-6" strokeWidth={1.5} />
       </div>
       {filtered ? (

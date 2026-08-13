@@ -85,7 +85,7 @@ export default async function BusinessProfilePage({
 
       <div className="mx-auto flex w-full max-w-2xl flex-1 flex-col gap-6 p-4">
         <div className="-mt-16 flex flex-col items-start gap-3">
-          <div className="relative size-24 shrink-0 overflow-hidden rounded-full ring-4 ring-accent shadow-[0_0_28px_-4px_rgba(240,169,63,0.7)]">
+          <div className="relative size-24 shrink-0 overflow-hidden rounded-2xl border-4 border-background bg-card shadow-md">
             {cover ? (
               <Image
                 src={cover.url}
@@ -177,11 +177,11 @@ export default async function BusinessProfilePage({
                     <p className="font-medium text-foreground">
                       {service.name}
                     </p>
-                    <p className="text-sm text-muted-foreground">
+                    <p className="font-mono text-sm text-muted-foreground">
                       {service.duration_minutes} min
                     </p>
                   </div>
-                  <p className="shrink-0 font-medium text-foreground">
+                  <p className="shrink-0 font-mono font-medium text-foreground">
                     ${service.price.toLocaleString("es-AR")}
                   </p>
                 </div>

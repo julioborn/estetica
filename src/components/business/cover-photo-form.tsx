@@ -36,7 +36,7 @@ export function CoverPhotoForm({
 
   return (
     <form ref={formRef} className="flex items-center gap-4">
-      <div className="relative size-24 shrink-0 overflow-hidden rounded-full ring-2 ring-accent/70 ring-offset-2 ring-offset-background bg-secondary">
+      <div className="relative size-24 shrink-0 overflow-hidden rounded-2xl border border-border bg-secondary">
         {shown ? (
           <Image src={shown} alt="" fill className="object-cover" sizes="96px" />
         ) : (

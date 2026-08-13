@@ -9,9 +9,13 @@ export function BusinessCard({ business }: { business: NearbyBusiness }) {
   return (
     <Link
       href={`/negocio/${business.slug}`}
-      className="flex gap-4 rounded-2xl border border-border bg-card p-3 transition-shadow hover:shadow-[0_0_24px_-6px_rgba(240,169,63,0.35)]"
+      className="relative flex gap-4 rounded-2xl border border-border bg-card p-3 shadow-sm transition-shadow hover:shadow-md"
     >
-      <div className="relative size-20 shrink-0 overflow-hidden rounded-full ring-2 ring-accent/70 ring-offset-2 ring-offset-card">
+      <span
+        aria-hidden
+        className="absolute top-1/2 right-0 size-4 -translate-y-1/2 translate-x-1/2 rounded-full bg-background"
+      />
+      <div className="relative size-20 shrink-0 overflow-hidden rounded-xl bg-secondary">
         {business.cover_url ? (
           <Image
             src={business.cover_url}
@@ -21,7 +25,7 @@ export function BusinessCard({ business }: { business: NearbyBusiness }) {
             sizes="80px"
           />
         ) : (
-          <div className="flex size-full items-center justify-center bg-secondary text-muted-foreground">
+          <div className="flex size-full items-center justify-center text-muted-foreground">
             <Store className="size-7" strokeWidth={1.5} />
           </div>
         )}
@@ -32,7 +36,7 @@ export function BusinessCard({ business }: { business: NearbyBusiness }) {
             {business.name}
           </h3>
           {business.distance_km !== null && (
-            <span className="shrink-0 text-sm text-muted-foreground">
+            <span className="shrink-0 font-mono text-xs text-muted-foreground">
               {formatDistance(business.distance_km)}
             </span>
           )}
