@@ -84,20 +84,47 @@ export function MapView({
               position={{ lat: active.lat, lng: active.lng }}
               onCloseClick={() => setActiveId(null)}
             >
-              <button
-                type="button"
-                onClick={() => router.push(`/negocio/${active.slug}`)}
-                className="flex flex-col gap-0.5 text-left"
-              >
-                <span className="font-heading font-bold text-[#3d3630]">
-                  {active.name}
-                </span>
-                {active.address_text && (
-                  <span className="text-xs text-[#8c8072]">
-                    {active.address_text}
-                  </span>
-                )}
-              </button>
+              <div style={{ width: 224 }}>
+                <div className="flex gap-3">
+                  <div className="relative size-14 shrink-0 overflow-hidden rounded-lg bg-[#dfd6c8]">
+                    {active.cover_url ? (
+                      <Image
+                        src={active.cover_url}
+                        alt=""
+                        fill
+                        className="object-cover"
+                        sizes="56px"
+                      />
+                    ) : (
+                      <div className="flex size-full items-center justify-center text-[#8c8072]">
+                        <Store className="size-6" strokeWidth={1.5} />
+                      </div>
+                    )}
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <p className="font-heading truncate font-bold text-[#3d3630]">
+                      {active.name}
+                    </p>
+                    {active.category_names && active.category_names.length > 0 && (
+                      <p className="truncate text-xs text-[#8c8072]">
+                        {active.category_names.join(" · ")}
+                      </p>
+                    )}
+                    {active.address_text && (
+                      <p className="truncate text-xs text-[#8c8072]">
+                        {active.address_text}
+                      </p>
+                    )}
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => router.push(`/negocio/${active.slug}`)}
+                  className="mt-3 w-full rounded-lg bg-[#9bae9b] py-1.5 font-heading text-sm font-bold text-[#2c332c] transition-opacity hover:opacity-90"
+                >
+                  Ver negocio
+                </button>
+              </div>
             </InfoWindow>
           )}
         </Map>
