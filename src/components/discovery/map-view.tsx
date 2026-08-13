@@ -13,7 +13,7 @@ import { Store } from "lucide-react";
 import { useState } from "react";
 import type { NearbyBusiness } from "@/lib/discovery/types";
 
-const CALCHAQUI_CENTER = { lat: -29.9333, lng: -60.2667 };
+const CALCHAQUI_CENTER = { lat: -29.8989, lng: -60.2812 };
 
 export function MapView({
   apiKey,
@@ -38,7 +38,7 @@ export function MapView({
         <Map
           mapId="DEMO_MAP_ID"
           defaultCenter={center ?? CALCHAQUI_CENTER}
-          defaultZoom={center ? 14 : 13}
+          defaultZoom={15}
           disableDefaultUI
           zoomControl
           gestureHandling="greedy"
