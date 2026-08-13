@@ -9,7 +9,7 @@ export function BusinessCard({ business }: { business: NearbyBusiness }) {
   return (
     <Link
       href={`/negocio/${business.slug}`}
-      className="relative flex gap-4 rounded-2xl border border-border bg-card p-3 shadow-sm transition-shadow hover:shadow-md"
+      className="relative flex gap-4 rounded-2xl border border-border bg-card p-3 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md motion-reduce:hover:translate-y-0"
     >
       <span
         aria-hidden

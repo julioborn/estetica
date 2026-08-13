@@ -119,8 +119,14 @@ export function DiscoveryView({
         <EmptyState filtered={selectedCategory !== null} />
       ) : (
         <div className="flex flex-col gap-3">
-          {businesses.map((business) => (
-            <BusinessCard key={business.id} business={business} />
+          {businesses.map((business, i) => (
+            <div
+              key={business.id}
+              style={{ animationDelay: `${Math.min(i, 6) * 60}ms` }}
+              className="animate-in fade-in slide-in-from-bottom-2 fill-mode-backwards duration-500 motion-reduce:animate-none"
+            >
+              <BusinessCard business={business} />
+            </div>
           ))}
         </div>
       )}
