@@ -3,6 +3,7 @@ import { createClient } from "@/lib/supabase/server";
 import { AppHeader } from "@/components/app-header";
 import { CoverPhotoForm } from "@/components/business/cover-photo-form";
 import { CategoryPicker } from "@/components/business/category-picker";
+import { ServicesManager } from "@/components/business/services-manager";
 import { updateBusinessProfile, updateBusinessCategories } from "./actions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -24,6 +25,13 @@ interface OwnedBusiness {
   address_text: string | null;
   business_media: { url: string; kind: string }[];
   business_categories: { category_id: string }[];
+  services: {
+    id: string;
+    name: string;
+    duration_minutes: number;
+    price: number;
+    active: boolean;
+  }[];
 }
 
 export default async function BusinessHomePage({
@@ -53,7 +61,8 @@ export default async function BusinessHomePage({
       .select(
         `id, name, description, phone, instagram_url, address_text,
          business_media(url, kind),
-         business_categories(category_id)`,
+         business_categories(category_id),
+         services(id, name, duration_minutes, price, active)`,
       )
       .eq("owner_id", user.id)
       .maybeSingle<OwnedBusiness>(),
@@ -185,6 +194,18 @@ export default async function BusinessHomePage({
                   Guardar rubros
                 </Button>
               </form>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Servicios</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <ServicesManager
+                businessId={business.id}
+                services={business.services}
+              />
             </CardContent>
           </Card>
         </>

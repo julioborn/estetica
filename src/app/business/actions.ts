@@ -78,6 +78,71 @@ export async function updateBusinessCategories(formData: FormData) {
   redirect("/business?message=Rubros actualizados");
 }
 
+export async function createService(formData: FormData) {
+  const businessId = formData.get("businessId") as string;
+  const name = formData.get("name") as string;
+  const durationMinutes = Number(formData.get("durationMinutes"));
+  const price = Number(formData.get("price"));
+
+  const supabase = await createClient();
+  const { error } = await supabase.from("services").insert({
+    business_id: businessId,
+    name,
+    duration_minutes: durationMinutes,
+    price,
+  });
+
+  if (error) {
+    redirect(`/business?error=${encodeURIComponent(error.message)}`);
+  }
+
+  revalidatePath("/business");
+  redirect("/business?message=Servicio agregado");
+}
+
+export async function updateService(formData: FormData) {
+  const serviceId = formData.get("serviceId") as string;
+  const name = formData.get("name") as string;
+  const durationMinutes = Number(formData.get("durationMinutes"));
+  const price = Number(formData.get("price"));
+  const active = formData.get("active") === "on";
+
+  const supabase = await createClient();
+  const { error } = await supabase
+    .from("services")
+    .update({
+      name,
+      duration_minutes: durationMinutes,
+      price,
+      active,
+    })
+    .eq("id", serviceId);
+
+  if (error) {
+    redirect(`/business?error=${encodeURIComponent(error.message)}`);
+  }
+
+  revalidatePath("/business");
+  redirect("/business?message=Servicio actualizado");
+}
+
+export async function deleteService(formData: FormData) {
+  const serviceId = formData.get("serviceId") as string;
+
+  const supabase = await createClient();
+  const { error } = await supabase
+    .from("services")
+    .delete()
+    .eq("id", serviceId);
+
+  if (error) {
+    redirect(`/business?error=${encodeURIComponent(error.message)}`);
+  }
+
+  revalidatePath("/business");
+  redirect("/business?message=Servicio eliminado");
+}
+
 export async function uploadBusinessCoverPhoto(formData: FormData) {
   const businessId = formData.get("businessId") as string;
   const file = formData.get("file") as File;
