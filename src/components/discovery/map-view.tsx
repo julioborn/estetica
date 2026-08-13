@@ -51,7 +51,7 @@ export function MapView({
                 scale: 7,
                 fillColor: "#4A9EFF",
                 fillOpacity: 1,
-                strokeColor: "#fbf7f1",
+                strokeColor: "#eae4db",
                 strokeWeight: 2,
               }}
             />
@@ -89,11 +89,11 @@ export function MapView({
                 onClick={() => router.push(`/negocio/${active.slug}`)}
                 className="flex flex-col gap-0.5 text-left"
               >
-                <span className="font-heading font-bold text-[#2a2118]">
+                <span className="font-heading font-bold text-[#3d3630]">
                   {active.name}
                 </span>
                 {active.address_text && (
-                  <span className="text-xs text-[#8a7b68]">
+                  <span className="text-xs text-[#8c8072]">
                     {active.address_text}
                   </span>
                 )}
