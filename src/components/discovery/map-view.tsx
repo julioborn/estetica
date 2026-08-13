@@ -145,7 +145,7 @@ export function MapView({
                 <button
                   type="button"
                   onClick={() => router.push(`/negocio/${active.slug}`)}
-                  className="mt-3 w-full rounded-lg bg-[#9b8398] py-1.5 font-heading text-sm font-bold text-[#2b2430] transition-opacity hover:opacity-90"
+                  className="mt-3 w-full rounded-lg bg-[#a9666f] py-1.5 font-heading text-sm font-bold text-[#2e1e22] transition-opacity hover:opacity-90"
                 >
                   Ver negocio
                 </button>
