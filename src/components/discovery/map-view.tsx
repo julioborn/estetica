@@ -8,12 +8,36 @@ import {
   Marker,
   AdvancedMarker,
   InfoWindow,
+  useMap,
 } from "@vis.gl/react-google-maps";
 import { Store } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { NearbyBusiness } from "@/lib/discovery/types";
 
 const CALCHAQUI_CENTER = { lat: -29.8989, lng: -60.2812 };
+const DEFAULT_ZOOM = 13;
+const LOCATED_ZOOM = 14;
+
+// defaultCenter/defaultZoom on <Map> only apply once, at mount — they don't
+// react to prop changes. This recenters the already-mounted map whenever the
+// user's location becomes available (e.g. after tapping "Activar ubicación").
+function MapRecenter({
+  center,
+  zoom,
+}: {
+  center: { lat: number; lng: number } | null;
+  zoom: number;
+}) {
+  const map = useMap();
+
+  useEffect(() => {
+    if (!map || !center) return;
+    map.panTo(center);
+    map.setZoom(zoom);
+  }, [map, center, zoom]);
+
+  return null;
+}
 
 export function MapView({
   apiKey,
@@ -38,11 +62,12 @@ export function MapView({
         <Map
           mapId="DEMO_MAP_ID"
           defaultCenter={center ?? CALCHAQUI_CENTER}
-          defaultZoom={15}
+          defaultZoom={DEFAULT_ZOOM}
           disableDefaultUI
           zoomControl
           gestureHandling="greedy"
         >
+          <MapRecenter center={center} zoom={LOCATED_ZOOM} />
           {center && (
             <Marker
               position={center}
