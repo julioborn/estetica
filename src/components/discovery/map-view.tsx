@@ -84,7 +84,7 @@ export function MapView({
               position={{ lat: active.lat, lng: active.lng }}
               onCloseClick={() => setActiveId(null)}
             >
-              <div style={{ width: 224 }}>
+              <div style={{ width: 260 }}>
                 <div className="flex gap-3">
                   <div className="relative size-14 shrink-0 overflow-hidden rounded-lg bg-[#dfd6c8]">
                     {active.cover_url ? (
@@ -102,16 +102,16 @@ export function MapView({
                     )}
                   </div>
                   <div className="min-w-0 flex-1">
-                    <p className="font-heading truncate font-bold text-[#3d3630]">
+                    <p className="font-heading font-bold text-[#3d3630]">
                       {active.name}
                     </p>
                     {active.category_names && active.category_names.length > 0 && (
-                      <p className="truncate text-xs text-[#8c8072]">
+                      <p className="text-xs text-[#8c8072]">
                         {active.category_names.join(" · ")}
                       </p>
                     )}
                     {active.address_text && (
-                      <p className="truncate text-xs text-[#8c8072]">
+                      <p className="text-xs text-[#8c8072]">
                         {active.address_text}
                       </p>
                     )}
