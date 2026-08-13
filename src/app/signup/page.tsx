@@ -3,13 +3,7 @@ import { signup } from "@/lib/supabase/actions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 
 export default async function SignupPage({
   searchParams,
@@ -19,14 +13,21 @@ export default async function SignupPage({
   const { error } = await searchParams;
 
   return (
-    <div className="flex flex-1 items-center justify-center p-6">
+    <div className="flex flex-1 flex-col items-center justify-center gap-6 p-6">
+      <div className="flex flex-col items-center gap-2">
+        <span className="flex size-10 items-center justify-center rounded-full bg-accent font-heading text-lg font-bold text-accent-foreground">
+          E
+        </span>
+        <h1 className="font-heading text-2xl font-bold text-foreground">
+          Creá tu cuenta
+        </h1>
+        <p className="max-w-xs text-center text-sm text-muted-foreground">
+          Reservá turnos en barberías, peluquerías, masajes y más, cerca
+          tuyo.
+        </p>
+      </div>
+
       <Card className="w-full max-w-sm">
-        <CardHeader>
-          <CardTitle>Crear cuenta</CardTitle>
-          <CardDescription>
-            Reservá turnos en barberías, peluquerías, masajes y más, cerca tuyo.
-          </CardDescription>
-        </CardHeader>
         <CardContent>
           <form action={signup} className="flex flex-col gap-4">
             <div className="grid grid-cols-2 gap-3">
@@ -73,13 +74,16 @@ export default async function SignupPage({
               />
             </div>
             {error && <p className="text-sm text-destructive">{error}</p>}
-            <Button type="submit" className="w-full">
+            <Button type="submit" size="xl" className="mt-1 w-full">
               Crear cuenta
             </Button>
           </form>
-          <p className="mt-4 text-center text-sm text-muted-foreground">
+          <p className="mt-5 text-center text-sm text-muted-foreground">
             ¿Ya tenés cuenta?{" "}
-            <Link href="/login" className="underline underline-offset-4">
+            <Link
+              href="/login"
+              className="font-medium text-accent hover:underline underline-offset-4"
+            >
               Iniciá sesión
             </Link>
           </p>

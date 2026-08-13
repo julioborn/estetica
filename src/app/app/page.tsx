@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
-import { LogoutButton } from "@/components/logout-button";
+import { AppHeader } from "@/components/app-header";
 import { DiscoveryView } from "@/components/discovery/discovery-view";
 import type { Category, NearbyBusiness } from "@/lib/discovery/types";
 
@@ -29,19 +29,13 @@ export default async function ClientHomePage() {
     }),
   ]);
 
+  const displayName = profile?.first_name
+    ? `${profile.first_name} ${profile.last_name ?? ""}`.trim()
+    : (user.email ?? "");
+
   return (
     <div className="flex flex-1 flex-col">
-      <header className="flex items-center justify-between border-b border-border px-4 py-3">
-        <div>
-          <p className="text-sm text-muted-foreground">Hola,</p>
-          <p className="font-medium text-foreground">
-            {profile?.first_name
-              ? `${profile.first_name} ${profile.last_name ?? ""}`.trim()
-              : user.email}
-          </p>
-        </div>
-        <LogoutButton />
-      </header>
+      <AppHeader greeting="Hola," name={displayName} />
       <DiscoveryView
         categories={(categories ?? []) as Category[]}
         initialBusinesses={(businesses ?? []) as NearbyBusiness[]}

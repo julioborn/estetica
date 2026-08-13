@@ -51,7 +51,7 @@ export function MapView({
                 scale: 7,
                 fillColor: "#4A9EFF",
                 fillOpacity: 1,
-                strokeColor: "#171412",
+                strokeColor: "#fbf7f1",
                 strokeWeight: 2,
               }}
             />

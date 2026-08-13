@@ -74,7 +74,7 @@ export function DiscoveryView({
   };
 
   return (
-    <div className="flex flex-1 flex-col gap-4 p-4">
+    <div className="mx-auto flex w-full max-w-2xl flex-1 flex-col gap-4 p-4 sm:p-6">
       <div className="flex items-center justify-between gap-3">
         <LocationControl state={location} onRequest={handleRequestLocation} />
         <div className="flex shrink-0 overflow-hidden rounded-full border border-border">
@@ -98,6 +98,13 @@ export function DiscoveryView({
         selected={selectedCategory}
         onSelect={handleSelectCategory}
       />
+
+      {view === "list" && !isPending && businesses.length > 0 && (
+        <p className="font-mono text-xs text-muted-foreground">
+          {businesses.length}{" "}
+          {businesses.length === 1 ? "negocio" : "negocios"} cerca tuyo
+        </p>
+      )}
 
       {view === "map" ? (
         process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY ? (

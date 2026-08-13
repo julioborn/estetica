@@ -18,7 +18,7 @@ export function LocationControl({
 }) {
   if (state.status === "granted") {
     return (
-      <p className="flex items-center gap-1.5 text-sm text-muted-foreground">
+      <p className="flex items-center gap-1.5 text-sm font-medium text-accent">
         <LocateFixed className="size-3.5" />
         Ordenado por cercanía
       </p>
@@ -31,10 +31,10 @@ export function LocationControl({
       onClick={onRequest}
       disabled={state.status === "loading"}
       className={cn(
-        "flex items-center gap-1.5 text-sm font-medium underline underline-offset-4",
+        "flex items-center gap-1.5 rounded-full py-1 text-sm font-medium transition-colors",
         state.status === "denied"
           ? "text-muted-foreground"
-          : "text-foreground",
+          : "text-foreground hover:text-accent",
       )}
     >
       {state.status === "loading" ? (
@@ -48,7 +48,7 @@ export function LocationControl({
         ? "Buscando tu ubicación…"
         : state.status === "denied"
           ? "Ubicación no disponible — mostrando todos"
-          : "Activar ubicación para ver qué está más cerca"}
+          : "Activar ubicación"}
     </button>
   );
 }

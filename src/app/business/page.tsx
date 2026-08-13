@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
-import { LogoutButton } from "@/components/logout-button";
+import { AppHeader } from "@/components/app-header";
 import { CoverPhotoForm } from "@/components/business/cover-photo-form";
 import { CategoryPicker } from "@/components/business/category-picker";
 import { updateBusinessProfile, updateBusinessCategories } from "./actions";
@@ -62,19 +62,16 @@ export default async function BusinessHomePage({
 
   const displayName = profile?.first_name
     ? `${profile.first_name} ${profile.last_name ?? ""}`.trim()
-    : user.email;
+    : (user.email ?? "");
 
   return (
-    <div className="mx-auto flex w-full max-w-2xl flex-1 flex-col gap-6 p-4">
-      <div className="flex items-center justify-between">
-        <h1 className="font-heading text-2xl font-bold text-foreground">
-          Hola, {displayName}
-        </h1>
-        <LogoutButton />
-      </div>
-
-      {message && <p className="text-sm text-emerald-600">{message}</p>}
-      {actionError && <p className="text-sm text-destructive">{actionError}</p>}
+    <div className="flex flex-1 flex-col">
+      <AppHeader greeting="Tu negocio," name={displayName} />
+      <div className="mx-auto flex w-full max-w-2xl flex-1 flex-col gap-6 p-4 sm:p-6">
+        {message && <p className="text-sm text-success">{message}</p>}
+        {actionError && (
+          <p className="text-sm text-destructive">{actionError}</p>
+        )}
 
       {profile?.role === "employee" && (
         <p className="text-muted-foreground">
@@ -192,6 +189,7 @@ export default async function BusinessHomePage({
           </Card>
         </>
       )}
+      </div>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Phone, Store } from "lucide-react";
+import { Clock, ChevronLeft, ExternalLink, Phone, Store } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -81,9 +81,16 @@ export default async function BusinessProfilePage({
           </div>
         )}
         <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-background to-transparent" />
+        <Link
+          href="/app"
+          className="absolute top-4 left-4 flex size-9 items-center justify-center rounded-full bg-background/90 text-foreground shadow-sm backdrop-blur-sm transition-colors hover:bg-background"
+        >
+          <ChevronLeft className="size-5" />
+          <span className="sr-only">Volver</span>
+        </Link>
       </div>
 
-      <div className="mx-auto flex w-full max-w-2xl flex-1 flex-col gap-6 p-4">
+      <div className="mx-auto flex w-full max-w-2xl flex-1 flex-col gap-6 p-4 sm:p-6">
         <div className="-mt-16 flex flex-col items-start gap-3">
           <div className="relative size-24 shrink-0 overflow-hidden rounded-2xl border-4 border-background bg-card shadow-md">
             {cover ? (
@@ -102,7 +109,7 @@ export default async function BusinessProfilePage({
           </div>
         </div>
         <div className="flex flex-col gap-2">
-          <h1 className="font-heading text-2xl font-bold text-foreground">
+          <h1 className="font-heading text-3xl font-bold text-foreground">
             {business.name}
           </h1>
           {categoryNames.length > 0 && (
@@ -125,20 +132,27 @@ export default async function BusinessProfilePage({
           <p className="text-foreground/90">{business.description}</p>
         )}
 
-        <div className="flex flex-col gap-2 sm:flex-row">
-          <Button disabled className="flex-1">
-            Reservar en la app — próximamente
-          </Button>
-          {business.phone && (
-            <Button
-              variant="outline"
-              nativeButton={false}
-              render={<a href={`tel:${business.phone}`} />}
-            >
-              <Phone className="size-4" />
-              Llamar
+        <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-2 sm:flex-row">
+            <Button disabled size="xl" className="flex-1">
+              Reservar turno
             </Button>
-          )}
+            {business.phone && (
+              <Button
+                variant="outline"
+                size="xl"
+                nativeButton={false}
+                render={<a href={`tel:${business.phone}`} />}
+              >
+                <Phone className="size-4" />
+                Llamar
+              </Button>
+            )}
+          </div>
+          <p className="text-xs text-muted-foreground">
+            La reserva desde la app llega pronto — por ahora, llamá
+            directamente para coordinar.
+          </p>
         </div>
 
         {gallery.length > 0 && (
@@ -146,7 +160,7 @@ export default async function BusinessProfilePage({
             {gallery.map((item) => (
               <div
                 key={item.url}
-                className="relative aspect-square overflow-hidden rounded-lg bg-secondary"
+                className="relative aspect-square overflow-hidden rounded-xl bg-secondary"
               >
                 <Image
                   src={item.url}
@@ -161,27 +175,30 @@ export default async function BusinessProfilePage({
         )}
 
         <div className="flex flex-col gap-3">
-          <h2 className="font-heading font-bold text-foreground">Servicios</h2>
+          <h2 className="font-heading text-lg font-bold text-foreground">
+            Servicios
+          </h2>
           {activeServices.length === 0 ? (
             <p className="text-sm text-muted-foreground">
               Este negocio todavía no cargó sus servicios.
             </p>
           ) : (
-            <div className="flex flex-col divide-y divide-border rounded-xl border border-border bg-card">
+            <div className="flex flex-col divide-y divide-border overflow-hidden rounded-2xl border border-border bg-card">
               {activeServices.map((service) => (
                 <div
                   key={service.id}
-                  className="flex items-center justify-between gap-4 px-4 py-3"
+                  className="flex items-center justify-between gap-4 px-4 py-3.5 transition-colors hover:bg-secondary/60"
                 >
                   <div>
                     <p className="font-medium text-foreground">
                       {service.name}
                     </p>
-                    <p className="font-mono text-sm text-muted-foreground">
+                    <p className="flex items-center gap-1 font-mono text-sm text-muted-foreground">
+                      <Clock className="size-3.5" />
                       {service.duration_minutes} min
                     </p>
                   </div>
-                  <p className="shrink-0 font-mono font-medium text-foreground">
+                  <p className="shrink-0 font-mono text-lg font-semibold text-foreground">
                     ${service.price.toLocaleString("es-AR")}
                   </p>
                 </div>
@@ -195,8 +212,9 @@ export default async function BusinessProfilePage({
             href={business.instagram_url}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm text-muted-foreground underline underline-offset-4"
+            className="flex w-fit items-center gap-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-accent"
           >
+            <ExternalLink className="size-4" />
             Ver en Instagram
           </Link>
         )}

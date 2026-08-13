@@ -48,6 +48,8 @@ export async function updateSession(request: NextRequest) {
     pathname.startsWith("/app") ||
     pathname.startsWith("/business") ||
     pathname.startsWith("/admin");
+  const isAuthOnly =
+    pathname === "/" || pathname === "/login" || pathname === "/signup";
 
   if (!user && isProtected) {
     const url = request.nextUrl.clone();
@@ -56,7 +58,7 @@ export async function updateSession(request: NextRequest) {
     return NextResponse.redirect(url);
   }
 
-  if (user && isProtected) {
+  if (user && (isProtected || isAuthOnly)) {
     const { data: profile } = await supabase
       .from("profiles")
       .select("role")
@@ -64,6 +66,14 @@ export async function updateSession(request: NextRequest) {
       .single();
 
     const role = profile?.role ?? "client";
+    const home = ROLE_HOME[role] ?? "/app";
+
+    if (isAuthOnly) {
+      const url = request.nextUrl.clone();
+      url.pathname = home;
+      return NextResponse.redirect(url);
+    }
+
     const allowedPrefixes = ROLE_PREFIXES[role] ?? ROLE_PREFIXES.client;
     const allowed = allowedPrefixes.some((prefix) =>
       pathname.startsWith(prefix),
@@ -71,7 +81,7 @@ export async function updateSession(request: NextRequest) {
 
     if (!allowed) {
       const url = request.nextUrl.clone();
-      url.pathname = ROLE_HOME[role] ?? "/app";
+      url.pathname = home;
       return NextResponse.redirect(url);
     }
   }
