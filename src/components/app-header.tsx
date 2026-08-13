@@ -3,9 +3,11 @@ import { LogoutButton } from "@/components/logout-button";
 export function AppHeader({
   greeting,
   name,
+  rightSlot,
 }: {
   greeting: string;
   name: string;
+  rightSlot?: React.ReactNode;
 }) {
   return (
     <header className="flex items-center justify-between border-b border-border px-4 py-3.5 sm:px-6">
@@ -20,7 +22,10 @@ export function AppHeader({
           </span>
         </div>
       </div>
-      <LogoutButton />
+      <div className="flex items-center gap-2">
+        {rightSlot}
+        <LogoutButton />
+      </div>
     </header>
   );
 }

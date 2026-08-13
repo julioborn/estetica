@@ -143,6 +143,53 @@ export async function deleteService(formData: FormData) {
   redirect("/business?message=Servicio eliminado");
 }
 
+export async function updateBusinessHours(formData: FormData) {
+  const businessId = formData.get("businessId") as string;
+  const supabase = await createClient();
+
+  const rows: { business_id: string; day_of_week: number; open_time: string; close_time: string }[] = [];
+
+  for (let day = 0; day <= 6; day++) {
+    const isOpen = formData.get(`open-${day}`) === "on";
+    if (!isOpen) continue;
+
+    for (const block of [1, 2]) {
+      const openTime = formData.get(`openTime-${day}-${block}`) as string | null;
+      const closeTime = formData.get(`closeTime-${day}-${block}`) as string | null;
+      if (!openTime || !closeTime || closeTime <= openTime) continue;
+
+      rows.push({
+        business_id: businessId,
+        day_of_week: day,
+        open_time: openTime,
+        close_time: closeTime,
+      });
+    }
+  }
+
+  const { error: deleteError } = await supabase
+    .from("business_hours")
+    .delete()
+    .eq("business_id", businessId);
+
+  if (deleteError) {
+    redirect(`/business?error=${encodeURIComponent(deleteError.message)}`);
+  }
+
+  if (rows.length > 0) {
+    const { error: insertError } = await supabase
+      .from("business_hours")
+      .insert(rows);
+
+    if (insertError) {
+      redirect(`/business?error=${encodeURIComponent(insertError.message)}`);
+    }
+  }
+
+  revalidatePath("/business");
+  redirect("/business?message=Horarios actualizados");
+}
+
 export async function uploadBusinessCoverPhoto(formData: FormData) {
   const businessId = formData.get("businessId") as string;
   const file = formData.get("file") as File;

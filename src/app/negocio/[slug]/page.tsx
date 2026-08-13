@@ -1,10 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Clock, ChevronLeft, ExternalLink, Phone, Store } from "lucide-react";
+import { ChevronLeft, ExternalLink, Phone, Store } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { BookingSection } from "@/components/booking/booking-section";
 
 interface BusinessProfile {
   id: string;
@@ -27,23 +28,29 @@ interface BusinessProfile {
 
 export default async function BusinessProfilePage({
   params,
+  searchParams,
 }: {
   params: Promise<{ slug: string }>;
+  searchParams: Promise<{ error?: string; message?: string }>;
 }) {
   const { slug } = await params;
+  const { error: actionError, message } = await searchParams;
   const supabase = await createClient();
 
-  const { data: business } = await supabase
-    .from("businesses")
-    .select(
-      `id, name, description, phone, instagram_url, address_text,
-       business_categories(categories(name)),
-       business_media(url, kind, sort_order),
-       services(id, name, description, duration_minutes, price, active)`,
-    )
-    .eq("slug", slug)
-    .eq("status", "active")
-    .single<BusinessProfile>();
+  const [{ data: business }, { data: userData }] = await Promise.all([
+    supabase
+      .from("businesses")
+      .select(
+        `id, name, description, phone, instagram_url, address_text,
+         business_categories(categories(name)),
+         business_media(url, kind, sort_order),
+         services(id, name, description, duration_minutes, price, active)`,
+      )
+      .eq("slug", slug)
+      .eq("status", "active")
+      .single<BusinessProfile>(),
+    supabase.auth.getUser(),
+  ]);
 
   if (!business) {
     notFound();
@@ -132,28 +139,23 @@ export default async function BusinessProfilePage({
           <p className="text-foreground/90">{business.description}</p>
         )}
 
-        <div className="flex flex-col gap-2">
-          <div className="flex flex-col gap-2 sm:flex-row">
-            <Button disabled size="xl" className="flex-1">
-              Reservar turno
-            </Button>
-            {business.phone && (
-              <Button
-                variant="outline"
-                size="xl"
-                nativeButton={false}
-                render={<a href={`tel:${business.phone}`} />}
-              >
-                <Phone className="size-4" />
-                Llamar
-              </Button>
-            )}
-          </div>
-          <p className="text-xs text-muted-foreground">
-            La reserva desde la app llega pronto — por ahora, llamá
-            directamente para coordinar.
-          </p>
-        </div>
+        {message && <p className="text-sm text-success">{message}</p>}
+        {actionError && (
+          <p className="text-sm text-destructive">{actionError}</p>
+        )}
+
+        {business.phone && (
+          <Button
+            variant="outline"
+            size="xl"
+            nativeButton={false}
+            render={<a href={`tel:${business.phone}`} />}
+            className="w-full sm:w-fit"
+          >
+            <Phone className="size-4" />
+            Llamar
+          </Button>
+        )}
 
         {gallery.length > 0 && (
           <div className="grid grid-cols-3 gap-2">
@@ -183,27 +185,12 @@ export default async function BusinessProfilePage({
               Este negocio todavía no cargó sus servicios.
             </p>
           ) : (
-            <div className="flex flex-col divide-y divide-border overflow-hidden rounded-2xl border border-border bg-card">
-              {activeServices.map((service) => (
-                <div
-                  key={service.id}
-                  className="flex items-center justify-between gap-4 px-4 py-3.5 transition-colors hover:bg-secondary/60"
-                >
-                  <div>
-                    <p className="font-medium text-foreground">
-                      {service.name}
-                    </p>
-                    <p className="flex items-center gap-1 font-mono text-sm text-muted-foreground">
-                      <Clock className="size-3.5" />
-                      {service.duration_minutes} min
-                    </p>
-                  </div>
-                  <p className="shrink-0 font-mono text-lg font-semibold text-foreground">
-                    ${service.price.toLocaleString("es-AR")}
-                  </p>
-                </div>
-              ))}
-            </div>
+            <BookingSection
+              businessId={business.id}
+              slug={slug}
+              services={activeServices}
+              isLoggedIn={Boolean(userData.user)}
+            />
           )}
         </div>
 

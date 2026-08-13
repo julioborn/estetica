@@ -1,6 +1,9 @@
+import Link from "next/link";
 import { redirect } from "next/navigation";
+import { CalendarDays } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { AppHeader } from "@/components/app-header";
+import { Button } from "@/components/ui/button";
 import { DiscoveryView } from "@/components/discovery/discovery-view";
 import type { Category, NearbyBusiness } from "@/lib/discovery/types";
 
@@ -35,7 +38,21 @@ export default async function ClientHomePage() {
 
   return (
     <div className="flex flex-1 flex-col">
-      <AppHeader greeting="Hola," name={displayName} />
+      <AppHeader
+        greeting="Hola,"
+        name={displayName}
+        rightSlot={
+          <Button
+            variant="ghost"
+            size="icon-sm"
+            nativeButton={false}
+            render={<Link href="/app/turnos" />}
+          >
+            <CalendarDays className="size-4" />
+            <span className="sr-only">Mis turnos</span>
+          </Button>
+        }
+      />
       <DiscoveryView
         categories={(categories ?? []) as Category[]}
         initialBusinesses={(businesses ?? []) as NearbyBusiness[]}

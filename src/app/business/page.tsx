@@ -1,9 +1,12 @@
+import Link from "next/link";
 import { redirect } from "next/navigation";
+import { CalendarDays } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { AppHeader } from "@/components/app-header";
 import { CoverPhotoForm } from "@/components/business/cover-photo-form";
 import { CategoryPicker } from "@/components/business/category-picker";
 import { ServicesManager } from "@/components/business/services-manager";
+import { BusinessHoursForm } from "@/components/business/business-hours-form";
 import { updateBusinessProfile, updateBusinessCategories } from "./actions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -31,6 +34,11 @@ interface OwnedBusiness {
     duration_minutes: number;
     price: number;
     active: boolean;
+  }[];
+  business_hours: {
+    day_of_week: number;
+    open_time: string;
+    close_time: string;
   }[];
 }
 
@@ -62,7 +70,8 @@ export default async function BusinessHomePage({
         `id, name, description, phone, instagram_url, address_text,
          business_media(url, kind),
          business_categories(category_id),
-         services(id, name, duration_minutes, price, active)`,
+         services(id, name, duration_minutes, price, active),
+         business_hours(day_of_week, open_time, close_time)`,
       )
       .eq("owner_id", user.id)
       .maybeSingle<OwnedBusiness>(),
@@ -75,7 +84,21 @@ export default async function BusinessHomePage({
 
   return (
     <div className="flex flex-1 flex-col">
-      <AppHeader greeting="Tu negocio," name={displayName} />
+      <AppHeader
+        greeting="Tu negocio,"
+        name={displayName}
+        rightSlot={
+          <Button
+            variant="ghost"
+            size="icon-sm"
+            nativeButton={false}
+            render={<Link href="/business/turnos" />}
+          >
+            <CalendarDays className="size-4" />
+            <span className="sr-only">Agenda</span>
+          </Button>
+        }
+      />
       <div className="mx-auto flex w-full max-w-2xl flex-1 flex-col gap-6 p-4 sm:p-6">
         {message && <p className="text-sm text-success">{message}</p>}
         {actionError && (
@@ -84,8 +107,8 @@ export default async function BusinessHomePage({
 
       {profile?.role === "employee" && (
         <p className="text-muted-foreground">
-          Vista de empleado en construcción — todavía no podés editar el
-          negocio, solo gestionar tus turnos asignados (próximamente).
+          Todavía no podés editar el negocio — tocá el calendario de arriba
+          para ver y gestionar los turnos que te asignaron.
         </p>
       )}
 
@@ -205,6 +228,18 @@ export default async function BusinessHomePage({
               <ServicesManager
                 businessId={business.id}
                 services={business.services}
+              />
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Horarios de atención</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <BusinessHoursForm
+                businessId={business.id}
+                hours={business.business_hours}
               />
             </CardContent>
           </Card>
